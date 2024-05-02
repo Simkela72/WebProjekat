@@ -1,0 +1,66 @@
+﻿@model WebApp.Models.FitnesCentar
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fitness Center Details</title>
+</head>
+<body>
+    <h2>Fitness Center Details</h2>
+
+    <form method="post" action="~/Vlasnik/UpdateFitnesCenter">
+        @Html.HiddenFor(model => model.Naziv)
+        @Html.HiddenFor(model => model.Adresa)
+        @Html.HiddenFor(model => model.GodinaOtvaranja)
+
+        <div>
+            <label>Name:</label>
+            <span>@Html.DisplayFor(model => model.Naziv)</span>
+        </div>
+
+        <div>
+            <label>Address:</label>
+            <span>@Html.DisplayFor(model => model.Adresa)</span>
+        </div>
+
+        <div>
+            <label>Date of Opening:</label>
+            <span>@Html.DisplayFor(model => model.GodinaOtvaranja)</span>
+        </div>
+
+        <div>
+            <label>Monthly Price:</label>
+            <input type="text" id="CenaMesec" name="CenaMesec" value="@Model.CenaMesec" />
+        </div>
+
+        <div>
+            <label>Yearly Price:</label>
+            <input type="text" id="CenaGodina" name="CenaGodina" value="@Model.CenaGodina" />
+        </div>
+
+        <div>
+            <label>Price for One Training:</label>
+            <input type="text" id="JedanTrening" name="JedanTrening" value="@Model.JedanTrening" />
+        </div>
+
+        <div>
+            <label>Price for Group Training:</label>
+            <input type="text" id="GrupniTrening" name="GrupniTrening" value="@Model.GrupniTrening" />
+        </div>
+
+        <div>
+            <label>Price for Personal Trainer:</label>
+            <input type="text" id="CenaPersonalTrener" name="CenaPersonalTrener" value="@Model.CenaPersonalTrener" />
+        </div>
+
+        <div>
+            <label>Owner:</label>
+            <span>@Html.DisplayFor(model => model.Vlasnik)</span>
+        </div>
+
+        <div>
+            <input type="submit" value="Izmeni" />
+        </div>
+    </form>
+</body>
+</html>

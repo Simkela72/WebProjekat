@@ -1,0 +1,44 @@
+﻿@model WebApp.Models.GrupniTrening
+
+<h2>Izmena Treninga</h2>
+
+<form action="@Url.Action("ModifySession")" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="GrupniTreningID">ID Grupnog Treninga</label>
+        <input type="text" id="GrupniTreningID" name="GrupniTreningID" value="@Model.GrupniTreningID" readonly="readonly" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="FitnesCentarNaziv">Naziv Fitnes Centra</label>
+        <input type="text" id="FitnesCentarNaziv" name="FitnesCentarNaziv" value="@Model.FitnesCentarNaziv" readonly="readonly" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="TipTreninga">Tip Treninga</label>
+        <select id="TipTreninga" name="TipTreninga" class="form-control">
+            <option value="1" name="Yoga">Yoga</option>
+            <option value="2" name="LesMillisTone">Les Millis Tone</option>
+            <option value="3" name="BodyPump">Body Pump</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Trajanje">Trajanje</label>
+        <input type="text" id="Trajanje" name="Trajanje" value="@Model.Trajanje" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="DatumOdrzavanja">Datum Održavanja</label>
+        <input type="date" id="DatumOdrzavanja" name="DatumOdrzavanja" value="@((Model.DatumOdrzavanja != null ? Model.DatumOdrzavanja.Value.ToString("yyyy-MM-dd") : ""))" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="MaxPosetilaca">Maksimalni Broj Posetilaca</label>
+        <input type="text" id="MaxPosetilaca" name="MaxPosetilaca" value="@Model.MaxPosetilaca" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sačuvaj</button>
+</form>
+

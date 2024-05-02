@@ -1,0 +1,63 @@
+﻿@model WebApp.Models.FitnesCentar
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dodaj Fitnes Centar</title>
+</head>
+<body>
+    <h2>Dodaj Fitnes Centar</h2>
+
+    <form method="post" action="@Url.Action("AddFitnesCentar", "Vlasnik")">
+        <div>
+            <label>Naziv:</label>
+            <input type="text" id="Naziv" name="Naziv" required />
+        </div>
+
+        <div>
+            <label>Adresa:</label>
+            <input type="text" id="Adresa" name="Adresa" required />
+        </div>
+
+        <div>
+            <label>Godina otvaranja:</label>
+            <input type="text" id="GodinaOtvaranja" name="GodinaOtvaranja" required />
+        </div>
+
+        <div>
+            <label>Cena mesecno:</label>
+            <input type="text" id="CenaMesec" name="CenaMesec" required />
+        </div>
+
+        <div>
+            <label>Cena godisnje:</label>
+            <input type="text" id="CenaGodina" name="CenaGodina" required />
+        </div>
+
+        <div>
+            <label>Cena za jedan trening:</label>
+            <input type="text" id="JedanTrening" name="JedanTrening" required />
+        </div>
+
+        <div>
+            <label>Cena za grupni trening:</label>
+            <input type="text" id="GrupniTrening" name="GrupniTrening" required />
+        </div>
+
+        <div>
+            <label>Cena za licnog trenera:</label>
+            <input type="text" id="CenaPersonalTrener" name="CenaPersonalTrener" required />
+        </div>
+
+        <div>
+            <label>Vlasnik:</label>
+            <span>@ViewBag.Vlasnik</span>
+            <input type="hidden" id="Vlasnik" name="Vlasnik" value="@ViewBag.Vlasnik" />
+        </div>
+
+        <div>
+            <input type="submit" value="Dodaj" />
+        </div>
+    </form>
+</body>
+</html>

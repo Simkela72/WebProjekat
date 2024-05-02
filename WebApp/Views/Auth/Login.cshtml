@@ -1,0 +1,53 @@
+﻿@model WebApp.Models.Korisnik
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+            <label for="KorisnickoIme">Username:</label>
+            @Html.TextBoxFor(m => m.KorisnickoIme)
+        </div>
+
+        <div>
+            <label for="Lozinka">Password:</label>
+            @Html.PasswordFor(m => m.Lozinka)
+        </div>
+
+        <button type="submit">Login</button>
+    }
+    <h2>Fitness Centers</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Date of Opening</th>
+            <th>Details</th>
+        </tr>
+        @foreach (var fitnesCentar in ViewBag.FitnesCentri)
+        {
+            <tr>
+                <td>@fitnesCentar.Naziv</td>
+                <td>@fitnesCentar.Adresa</td>
+                <td>@fitnesCentar.GodinaOtvaranja</td>
+                <td>
+                    
+                    <a href="@Url.Action("Details", "Auth", new { name = fitnesCentar.Naziv })">Details</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+</body>
+</html>

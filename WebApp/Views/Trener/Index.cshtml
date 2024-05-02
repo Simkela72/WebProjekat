@@ -1,0 +1,104 @@
+﻿@using WebApp.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Trainer</title>
+</head>
+<body>
+    <h2>Dodaj trening</h2>
+
+    <table border="1">
+        <form method="post" action="~/Trener/AddTrainingSession">
+        <tr>
+            <td>Fitnes centar:</td>
+            <td><input type="text" name="FitCen" value="@ViewBag.fitnes_centar" readonly /></td>
+        </tr>
+        <tr>
+            <td>Tip treninga:</td>
+            <td>
+                <select name="Tip" required>
+                    <option value="Yoga">Yoga</option>
+                    <option value="LesMillsTone">Les Mills Tone</option>
+                    <option value="BodyPump">Body Pump</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Trajanje:</td>
+            <td><input type="text" name="Trajanje" required /></td>
+        </tr>
+        <tr>
+            <td>Datum odrzavanja:</td>
+            <td><input type="date" name="Dat" required /></td>
+        </tr>
+        <tr>
+            <td>Max posetilaca:</td>
+            <td>
+                <input type="text" name="Max" required />
+            </td>
+        </tr>
+        <tr>
+            <td>Trener:</td>
+            <td><input type="text" name="Tren" required value="@ViewBag.Trener" readonly /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Kreiraj" /></td>
+        </tr>
+        </form>
+    </table>
+
+    <h2>Odrzani treninzi</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Fitnes Centar Naziv</th>
+            <th>Tip Treninga</th>
+            <th>Datum Odrzavanja</th>
+        </tr>
+        @foreach (var trening in ViewBag.odrzani)
+        {
+            <tr>
+                <td>@trening.GrupniTreningID</td>
+                <td>@trening.FitnesCentarNaziv</td>
+                <td>@trening.TipTreninga</td>
+                <td>@(trening.DatumOdrzavanja != DateTime.MinValue ? trening.DatumOdrzavanja.ToString("yyyy-MM-dd") : "")</td>
+            </tr>
+        }
+    </table>
+
+    <h2>Neodrzani treninzi</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Fitnes Centar Naziv</th>
+            <th>Tip Treninga</th>
+            <th>Datum Odrzavanja</th>
+            <th>Modifikuj</th>
+            <th>Izbrisi</th>
+        </tr>
+        @foreach (var trening in ViewBag.neodrzani)
+        {
+            <tr>
+                <td>@trening.GrupniTreningID</td>
+                <td>@trening.FitnesCentarNaziv</td>
+                <td>@trening.TipTreninga</td>
+                <td>@(trening.DatumOdrzavanja != DateTime.MinValue ? trening.DatumOdrzavanja.ToString("yyyy-MM-dd") : "")</td>
+                <td>
+                    <form method="post" action="@Url.Action("DeleteSession")">
+                        <input type="hidden" name="trainingId" value="@trening.GrupniTreningID"/>
+                        <button>Izbrisi</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="get" action="@Url.Action("ModifySessionView")">
+                        <input type="hidden" name="trainingId" value="@trening.GrupniTreningID" />
+                        <button type="submit">Modifikuj</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+
+</body>
+</html>

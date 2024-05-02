@@ -1,0 +1,117 @@
+﻿@using WebApp.Models
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Trainer</title>
+</head>
+<body>
+    <h2>Dodaj trenera</h2>
+
+    <table border="1">
+        <!-- Form to add a new trainer -->
+        <form method="post" action="~/Vlasnik/AddTrainer">
+        <tr>
+            <td>Korisnicko ime:</td>
+            <td><input type="text" name="KorIm" required /></td>
+        </tr>
+        <tr>
+            <td>Lozinka:</td>
+            <td><input type="text" name="Loz" required /></td>
+        </tr>
+        <tr>
+            <td>Ime:</td>
+            <td><input type="text" name="Im" required /></td>
+        </tr>
+        <tr>
+            <td>Prezime:</td>
+            <td><input type="text" name="Prez" required /></td>
+        </tr>
+        <tr>
+            <td>Pol:</td>
+            <td>
+                <select name="Ul" required>
+                    <option value="Muski">Muski</option>
+                    <option value="Zenski">Zenski</option>
+                    <option value="Drugo">Drugo</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input type="email" name="Email" required /></td>
+        </tr>
+        <tr>
+            <td>Datum rodjenja:</td>
+            <td><input type="date" name="Dat" required /></td>
+        </tr>
+        <tr>
+            <td>Fitness centar:</td>
+            <td>
+                <select name="fitnessCenterName" required>
+                    <!-- Display fitness centers from ViewBag -->
+                    @foreach (var fitnessCenter in ViewBag.FitnessCenters)
+                    {
+                        <option value="@fitnessCenter">@fitnessCenter</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Kreiraj" /></td>
+        </tr>
+        </form>
+    </table>
+
+    <h2>Vasi fitnes centri</h2>
+    <table border="1">
+        <tr>
+            <th>Izbrisi</th>
+            <th>Modifikuj</th>
+            <th>Naziv</th>
+            <th>Adresa</th>
+            <!-- Add more columns if needed -->
+        </tr>
+        @foreach (var fitnessCenter in ViewBag.FitnessCenters1)
+        {
+            <tr>
+                <td>
+                    <form id="formDeleteFitnesCentar_@fitnessCenter.Naziv" action="@Url.Action("DeleteFitnesCentar", "Vlasnik")" method="post">
+                        <input type="hidden" name="Naziv" value="@fitnessCenter.Naziv" />
+                        <button type="submit" style="background: none; border: none; padding: 0; color: red; text-decoration: underline; cursor: pointer;">Izbrisi</button>
+                    </form>
+                </td>
+                <td><a href="@Url.Action("ViewFitnesCentar", "Vlasnik", new { Naziv = fitnessCenter.Naziv })">Modifikuj</a></td>
+                <td>@fitnessCenter.Naziv</td>
+                <td>@fitnessCenter.Adresa</td>
+                <!-- Add more cells if needed -->
+            </tr>
+        }
+    </table>
+
+    <form id="formCreateFitnesCentar" action="@Url.Action("AddFitnesCenterView","Vlasnik")" method="get">
+        <button type="submit">Add Fitness Center</button>
+    </form>
+
+    <h2>Vasi zaposleni</h2>
+    <table border="1">
+        <tr>
+            <th>Korisnicko ime</th>
+        </tr>
+        <!-- Loop through your list of employees -->
+        @foreach (var employee in ViewBag.Zaposleni)
+        {
+            <tr>
+                <td>@employee</td>
+                <td>
+                    <!-- Form to block employee -->
+                    <form method="post" action="~/Vlasnik/BlockEmployee">
+                        <input type="hidden" name="KorisnickoIme" value="@employee" />
+                        <button type="submit">Block</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
