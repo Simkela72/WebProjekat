@@ -11,6 +11,7 @@
                 <th>Naziv</th>
                 <th>Adresa</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,12 @@
                         <form action="@Url.Action("GroupSessionView")" method="post">
                             <input type="hidden" name="fitnesCentarNaziv" value="@fitnesCentar.Naziv" />
                             <button type="submit">Pregled</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="@Url.Action("CommentView")" method="post">
+                            <input type="hidden" name="fitnesCentarNaziv" value="@fitnesCentar.Naziv" />
+                            <button type="submit">Ostavi utisak</button>
                         </form>
                     </td>
                 </tr>

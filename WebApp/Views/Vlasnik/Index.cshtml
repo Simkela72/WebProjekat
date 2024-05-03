@@ -9,7 +9,6 @@
     <h2>Dodaj trenera</h2>
 
     <table border="1">
-        <!-- Form to add a new trainer -->
         <form method="post" action="~/Vlasnik/AddTrainer">
         <tr>
             <td>Korisnicko ime:</td>
@@ -68,6 +67,7 @@
         <tr>
             <th>Izbrisi</th>
             <th>Modifikuj</th>
+            <th>Utisci</th>
             <th>Naziv</th>
             <th>Adresa</th>
             <!-- Add more columns if needed -->
@@ -82,6 +82,7 @@
                     </form>
                 </td>
                 <td><a href="@Url.Action("ViewFitnesCentar", "Vlasnik", new { Naziv = fitnessCenter.Naziv })">Modifikuj</a></td>
+                <td><a href="@Url.Action("CommentView","Vlasnik", new { Naziv = fitnessCenter.Naziv })">Komentari</a></td>
                 <td>@fitnessCenter.Naziv</td>
                 <td>@fitnessCenter.Adresa</td>
                 <!-- Add more cells if needed -->

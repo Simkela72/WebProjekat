@@ -1,0 +1,28 @@
+﻿<h2>Vas komentar</h2>
+
+<form action="@Url.Action("Comment")" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="comment_content">Komentar:</label>
+        <textarea id="comment_content" name="comment_content" class="form-control" rows="5"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="FitnesCentar">Fitnes Centar:</label>
+        <input type="text" id="FitnesCentar" name="FitnesCentar" class="form-control" value="@ViewBag.fitnesCentarNaziv" readonly />
+    </div>
+
+    <div class="form-group">
+        <label for="ocena">Ocena:</label>
+        <select id="ocena" name="ocena" class="form-control">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

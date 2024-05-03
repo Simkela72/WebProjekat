@@ -154,6 +154,7 @@
     </Compile>
     <Compile Include="Models\FitnesCentar.cs" />
     <Compile Include="Models\GrupniTrening.cs" />
+    <Compile Include="Models\Komentar.cs" />
     <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\PosetilacTrening.cs" />
     <Compile Include="Models\TrenerCentar.cs" />
@@ -175,6 +176,8 @@
     <Content Include="Views\Auth\RegisterView.cshtml" />
     <Content Include="Views\Posetilac\Index.cshtml" />
     <Content Include="Views\Posetilac\GroupSessionView.cshtml" />
+    <Content Include="Views\Posetilac\CommentView.cshtml" />
+    <Content Include="Views\Vlasnik\CommentView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

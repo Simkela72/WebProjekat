@@ -312,5 +312,64 @@ namespace WebApp.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public ActionResult CommentView(string Naziv)
+        {
+            List<Komentar> komentari = GetCommentByFitnesCenter(Naziv);
+            ViewBag.Komentari = komentari;
+            return View();
+        }
+
+        private List<Komentar> GetCommentByFitnesCenter(string Naziv)
+        {
+            List<Komentar> komentari = new List<Komentar>();
+            using(MySqlConnection connection=new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM komentar WHERE FitnesCentar=@naziv";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@naziv", Naziv);
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Komentar komentar = new Komentar()
+                        {
+                            ID = reader.GetInt32("ID"),
+                            comment_content = reader.GetString("comment_content"),
+                            FitnesCentar = reader.GetString("FitnesCentar"),
+                            odobren = reader.IsDBNull(reader.GetOrdinal("odobren")) ? null : (bool?)reader.GetBoolean("odobren"),
+                            ocena = reader.GetInt32("ocena")
+                        };
+                        komentari.Add(komentar);
+                    }
+                }
+            }
+            return komentari;
+        }
+
+        [HttpPost]
+        public ActionResult ApproveComment(int commentId, string action, string naziv)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+                
+                string query = "UPDATE komentar SET odobren = @odobren WHERE ID = @commentId";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    
+                    command.Parameters.AddWithValue("@odobren", (action == "Odobri" ? 1 : 0));
+                    command.Parameters.AddWithValue("@commentId", commentId);
+
+                    
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            
+            return RedirectToAction("CommentView", new { Naziv = naziv }); 
+        }
     }
 }

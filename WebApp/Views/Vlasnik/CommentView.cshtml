@@ -1,0 +1,17 @@
+﻿<h2>Komentari vaseg fitnes centra:</h2>
+@foreach (var komentar in ViewBag.Komentari)
+{
+    <div>
+        <p><strong>Komentar:</strong> @komentar.comment_content</p>
+        <p><strong>Ocena:</strong> @komentar.ocena</p>
+        <form action="@Url.Action("ApproveComment")" method="post">
+            <input type="hidden" name="commentId" value="@komentar.ID" />
+            <input type="hidden" name="naziv" value="@komentar.FitnesCentar" />
+            <select name="action">
+                <option value="Odobri" @(komentar.odobren ? "selected" : "")>Odobri</option>
+                <option value="Ukloni" @(komentar.odobren ? "" : "selected")>Ukloni</option>
+            </select>
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+}

@@ -171,5 +171,27 @@ namespace WebApp.Controllers
             return fitnesCentarNaziv;
         }
 
+        public ActionResult CommentView(string fitnesCentarNaziv)
+        {
+            ViewBag.fitnesCentarNaziv = fitnesCentarNaziv;
+            return View();
+        }
+
+        public ActionResult Comment(string comment_content, string FitnesCentar, int ocena)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "INSERT INTO komentar (comment_content, FitnesCentar, odobren, ocena) VALUES (@comment_content, @FitnesCentar, @odobren, @ocena)";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@comment_content", comment_content);
+                command.Parameters.AddWithValue("@FitnesCentar", FitnesCentar);
+                command.Parameters.AddWithValue("@odobren", false);
+                command.Parameters.AddWithValue("@ocena", ocena);
+                command.ExecuteNonQuery();
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }
