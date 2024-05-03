@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+
+    <body>
+    <table border="1">
+        <tr>
+            <th>Tip Treninga</th>
+            <th>Trajanje</th>
+            <th>Datum Održavanja</th>
+            <th>Max Posetilaca</th>
+            <th>Trener</th>
+            <th></th>
+        </tr>
+        @foreach (var trainingSession in ViewBag.PendingTrainingSessions)
+        {
+            <tr>
+                <td>@trainingSession.TipTreninga</td>
+                <td>@trainingSession.Trajanje</td>
+                <td>@trainingSession.DatumOdrzavanja.ToShortDateString()</td>
+                <td>@trainingSession.MaxPosetilaca</td>
+                <td>@trainingSession.Trener</td>
+                <td>
+                    <form action="@Url.Action("GroupSession")" method="post">
+                        <input type="hidden" name="grupniTreningId" value="@trainingSession.GrupniTreningID" />
+                        <button type="submit">Prijavi se</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+        </body>
+
+</html>

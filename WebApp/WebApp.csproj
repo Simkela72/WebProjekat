@@ -146,6 +146,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\PosetilacController.cs" />
     <Compile Include="Controllers\TrenerController.cs" />
     <Compile Include="Controllers\VlasnikController.cs" />
     <Compile Include="Global.asax.cs">
@@ -172,6 +173,8 @@
     <Content Include="Views\Trener\ModifySessionView.cshtml" />
     <Content Include="Views\Trener\SeeAllSubscribers.cshtml" />
     <Content Include="Views\Auth\RegisterView.cshtml" />
+    <Content Include="Views\Posetilac\Index.cshtml" />
+    <Content Include="Views\Posetilac\GroupSessionView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

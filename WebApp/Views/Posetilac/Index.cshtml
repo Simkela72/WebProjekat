@@ -1,0 +1,33 @@
+﻿@using WebApp.Models;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fitness Center Details</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Naziv</th>
+                <th>Adresa</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var fitnesCentar in ViewBag.FitnesCentri)
+            {
+                <tr>
+                    <td>@fitnesCentar.Naziv</td>
+                    <td>@fitnesCentar.Adresa</td>
+                    <td>
+                        <form action="@Url.Action("GroupSessionView")" method="post">
+                            <input type="hidden" name="fitnesCentarNaziv" value="@fitnesCentar.Naziv" />
+                            <button type="submit">Pregled</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </body>
+</html>
