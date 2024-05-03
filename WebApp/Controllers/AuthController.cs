@@ -152,7 +152,41 @@ namespace WebApp.Controllers
 
         }
 
-        
+        public ActionResult RegisterView()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(string KorisnickoIme, string Lozinka, string Ime, string Prezime, string Pol, string Email, DateTime DatumRodjenja)
+        {
+            string uloga = "Posetilac";
+
+            string query = "INSERT INTO korisnik (KorisnickoIme, Lozinka, Ime, Prezime, Pol, Email, DatumRodjenja, Uloga) " +
+                           "VALUES (@KorisnickoIme, @Lozinka, @Ime, @Prezime, @Pol, @Email, @DatumRodjenja, @Uloga)";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+
+
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@KorisnickoIme", KorisnickoIme);
+                    cmd.Parameters.AddWithValue("@Lozinka", Lozinka);
+                    cmd.Parameters.AddWithValue("@Ime", Ime);
+                    cmd.Parameters.AddWithValue("@Prezime", Prezime);
+                    cmd.Parameters.AddWithValue("@Pol", Pol);
+                    cmd.Parameters.AddWithValue("@Email", Email);
+                    cmd.Parameters.AddWithValue("@DatumRodjenja", DatumRodjenja);
+                    cmd.Parameters.AddWithValue("@Uloga", uloga);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            return RedirectToAction("Login");
+        }
 
 
     }

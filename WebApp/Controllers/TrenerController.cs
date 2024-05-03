@@ -213,5 +213,27 @@ namespace WebApp.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult SeeAllSubscribers(string trainingId)
+        {
+            List<string> pretplatnici = new List<string>();
+            using(MySqlConnection connection= new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM posetilac_trening WHERE Grupni_Trening=@GrTr";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@GrTr", trainingId);
+                using(MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        pretplatnici.Add(reader["Posetilac"].ToString());
+                    }
+                }
+
+            }
+            ViewBag.Pretplatnici = pretplatnici;
+            return View();
+        }
+
     }
 }

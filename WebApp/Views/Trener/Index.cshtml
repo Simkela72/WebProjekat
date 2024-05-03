@@ -55,15 +55,22 @@
             <th>Fitnes Centar Naziv</th>
             <th>Tip Treninga</th>
             <th>Datum Odrzavanja</th>
+            <th>Pretplatnici Detalji</th>
         </tr>
         @foreach (var trening in ViewBag.odrzani)
         {
-            <tr>
-                <td>@trening.GrupniTreningID</td>
-                <td>@trening.FitnesCentarNaziv</td>
-                <td>@trening.TipTreninga</td>
-                <td>@(trening.DatumOdrzavanja != DateTime.MinValue ? trening.DatumOdrzavanja.ToString("yyyy-MM-dd") : "")</td>
-            </tr>
+    <tr>
+        <td>@trening.GrupniTreningID</td>
+        <td>@trening.FitnesCentarNaziv</td>
+        <td>@trening.TipTreninga</td>
+        <td>@(trening.DatumOdrzavanja != DateTime.MinValue ? trening.DatumOdrzavanja.ToString("yyyy-MM-dd") : "")</td>
+        <td>
+            <form method="get" action="@Url.Action("SeeAllSubscribers")">
+                <input type="hidden" name="trainingId" value="@trening.GrupniTreningID" />
+                <button type="submit">Prikazi pretplatnike</button>
+            </form>
+        </td>
+    </tr>
         }
     </table>
 
@@ -76,6 +83,7 @@
             <th>Datum Odrzavanja</th>
             <th>Modifikuj</th>
             <th>Izbrisi</th>
+            <th>Pretplatnici Detalji</th>
         </tr>
         @foreach (var trening in ViewBag.neodrzani)
         {
@@ -94,6 +102,12 @@
                     <form method="get" action="@Url.Action("ModifySessionView")">
                         <input type="hidden" name="trainingId" value="@trening.GrupniTreningID" />
                         <button type="submit">Modifikuj</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="get" action="@Url.Action("SeeAllSubscribers")">
+                        <input type="hidden" name="trainingId" value="@trening.GrupniTreningID" />
+                        <button type="submit">Prikazi pretplatnike</button>
                     </form>
                 </td>
             </tr>

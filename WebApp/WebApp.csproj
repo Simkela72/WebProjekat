@@ -170,6 +170,8 @@
     <Content Include="Views\Vlasnik\AddFitnesCenterView.cshtml" />
     <Content Include="Views\Trener\Index.cshtml" />
     <Content Include="Views\Trener\ModifySessionView.cshtml" />
+    <Content Include="Views\Trener\SeeAllSubscribers.cshtml" />
+    <Content Include="Views\Auth\RegisterView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

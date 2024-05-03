@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista pretplatnika</title>
+</head>
+<body>
+    <h2>Lista korisnika prijavljenih na trening</h2>
+    <table border="1">
+        <tr>
+            <th>Korisnicko ime</th>
+        </tr>
+        @foreach (var subscriber in ViewBag.Pretplatnici)
+        {
+            <tr>
+                <td>@subscriber</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

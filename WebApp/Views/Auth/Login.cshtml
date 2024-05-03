@@ -25,7 +25,7 @@
             @Html.PasswordFor(m => m.Lozinka)
         </div>
 
-        <button type="submit">Login</button>
+        <button type="submit">Uloguj se</button>
     }
     <h2>Fitness Centers</h2>
     <table>
@@ -48,6 +48,10 @@
             </tr>
         }
     </table>
+
+    <form method="post" action="@Url.Action("RegisterView")">
+        <button type="submit">Registruj se</button>
+    </form>
 
 </body>
 </html>

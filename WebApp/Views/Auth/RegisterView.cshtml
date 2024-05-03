@@ -1,0 +1,52 @@
+﻿@model WebApp.Models.Korisnik
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+</head>
+<body>
+    <h2>Registration Form</h2>
+    <form method="post" action="@Url.Action("Register")">
+        <table>
+            <tr>
+                <td>Korisničko ime:</td>
+                <td><input type="text" name="KorisnickoIme" required /></td>
+            </tr>
+            <tr>
+                <td>Lozinka:</td>
+                <td><input type="password" name="Lozinka" required /></td>
+            </tr>
+            <tr>
+                <td>Ime:</td>
+                <td><input type="text" name="Ime" required /></td>
+            </tr>
+            <tr>
+                <td>Prezime:</td>
+                <td><input type="text" name="Prezime" required /></td>
+            </tr>
+            <tr>
+                <td>Pol:</td>
+                <td>
+                    <select name="Pol" required>
+                        <option value="Muski">Muški</option>
+                        <option value="Zenski">Ženski</option>
+                        <option value="Drugo">Drugo</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="email" name="Email" required /></td>
+            </tr>
+            <tr>
+                <td>Datum rođenja:</td>
+                <td><input type="date" name="DatumRodjenja" required /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Register" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
