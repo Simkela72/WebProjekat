@@ -12,6 +12,7 @@
                 <th>Adresa</th>
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -32,9 +33,18 @@
                             <button type="submit">Ostavi utisak</button>
                         </form>
                     </td>
+                    <td>
+                        <form action="@Url.Action("CommentFitnesCenterView")" method="post">
+                            <input type="hidden" name="fitnesCentarNaziv" value="@fitnesCentar.Naziv" />
+                            <button type="submit">Pogledajte recenzije</button>
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
-    </body>
+    <form action="@Url.Action("LogOut")" method="post">
+        <button type="submit">Log out</button>
+    </form>
+</body>
 </html>

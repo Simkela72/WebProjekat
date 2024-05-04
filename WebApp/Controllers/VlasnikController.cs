@@ -371,5 +371,13 @@ namespace WebApp.Controllers
             
             return RedirectToAction("CommentView", new { Naziv = naziv }); 
         }
+
+        public ActionResult Logout()
+        {
+
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Login", "Auth");
+        }
     }
 }

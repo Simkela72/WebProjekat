@@ -14,53 +14,56 @@
         @Html.HiddenFor(model => model.GodinaOtvaranja)
 
         <div>
-            <label>Name:</label>
+            <label>Naziv:</label>
             <span>@Html.DisplayFor(model => model.Naziv)</span>
         </div>
 
         <div>
-            <label>Address:</label>
+            <label>Adresa:</label>
             <span>@Html.DisplayFor(model => model.Adresa)</span>
         </div>
 
         <div>
-            <label>Date of Opening:</label>
-            <span>@Html.DisplayFor(model => model.GodinaOtvaranja)</span>
+            <label>Godina Otvaranja:</label>
+            <span>@((int)Model.GodinaOtvaranja)</span>
         </div>
 
         <div>
-            <label>Monthly Price:</label>
+            <label>Cena mesecno:</label>
             <input type="text" id="CenaMesec" name="CenaMesec" value="@Model.CenaMesec" />
         </div>
 
         <div>
-            <label>Yearly Price:</label>
+            <label>Cena godisnje:</label>
             <input type="text" id="CenaGodina" name="CenaGodina" value="@Model.CenaGodina" />
         </div>
 
         <div>
-            <label>Price for One Training:</label>
+            <label>Cena za jedan trening:</label>
             <input type="text" id="JedanTrening" name="JedanTrening" value="@Model.JedanTrening" />
         </div>
 
         <div>
-            <label>Price for Group Training:</label>
+            <label>Cena za grupni trening:</label>
             <input type="text" id="GrupniTrening" name="GrupniTrening" value="@Model.GrupniTrening" />
         </div>
 
         <div>
-            <label>Price for Personal Trainer:</label>
+            <label>Cena za licnog trenera:</label>
             <input type="text" id="CenaPersonalTrener" name="CenaPersonalTrener" value="@Model.CenaPersonalTrener" />
         </div>
 
         <div>
-            <label>Owner:</label>
+            <label>Vlasnik:</label>
             <span>@Html.DisplayFor(model => model.Vlasnik)</span>
         </div>
 
         <div>
             <input type="submit" value="Izmeni" />
         </div>
+    </form>
+    <form action="@Url.Action("LogOut")" method="post">
+        <button type="submit">Log out</button>
     </form>
 </body>
 </html>

@@ -178,6 +178,7 @@
     <Content Include="Views\Posetilac\GroupSessionView.cshtml" />
     <Content Include="Views\Posetilac\CommentView.cshtml" />
     <Content Include="Views\Vlasnik\CommentView.cshtml" />
+    <Content Include="Views\Posetilac\CommentFitnesCenterView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

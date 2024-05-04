@@ -28,7 +28,7 @@
         <button type="submit">Uloguj se</button>
     }
     <h2>Fitness Centers</h2>
-    <table>
+    <table border="1">
         <tr>
             <th>Naziv</th>
             <th>Adresa</th>
@@ -40,10 +40,10 @@
             <tr>
                 <td>@fitnesCentar.Naziv</td>
                 <td>@fitnesCentar.Adresa</td>
-                <td>@fitnesCentar.GodinaOtvaranja</td>
+                <td>@((int)fitnesCentar.GodinaOtvaranja)</td>
                 <td>
                     
-                    <a href="@Url.Action("Details", "Auth", new { name = fitnesCentar.Naziv })">Details</a>
+                    <a href="@Url.Action("Details", "Auth", new { name = fitnesCentar.Naziv })">Detalji</a>
                 </td>
             </tr>
         }

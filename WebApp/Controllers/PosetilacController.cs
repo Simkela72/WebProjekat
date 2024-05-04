@@ -21,12 +21,12 @@ namespace WebApp.Controllers
         private List<FitnesCentar> GetFitnesCentars()
         {
             List<FitnesCentar> fitnesCentars = new List<FitnesCentar>();
-            using(MySqlConnection connection=new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
                 string query = "SELECT * FROM fitnes_centar";
                 MySqlCommand cmd = new MySqlCommand(query, connection);
-                using(MySqlDataReader reader = cmd.ExecuteReader())
+                using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -97,7 +97,7 @@ namespace WebApp.Controllers
 
             bool alreadyJoined = CheckIfAlreadyJoined(grupniTreningId, currentVisitor);
             FitnesCentar fitnes_centar = new FitnesCentar();
-            
+
             if (!alreadyJoined)
             {
                 AddVisitorToSession(grupniTreningId, currentVisitor);
@@ -115,7 +115,7 @@ namespace WebApp.Controllers
 
         private bool CheckIfAlreadyJoined(int grupniTreningId, string currentVisitor)
         {
-           
+
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
@@ -124,13 +124,13 @@ namespace WebApp.Controllers
                 cmd.Parameters.AddWithValue("@grupniTreningId", grupniTreningId);
                 cmd.Parameters.AddWithValue("@currentVisitor", currentVisitor);
                 int count = Convert.ToInt32(cmd.ExecuteScalar());
-                return count > 0; 
+                return count > 0;
             }
         }
 
         private void AddVisitorToSession(int grupniTreningId, string currentVisitor)
         {
-            
+
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
@@ -192,6 +192,50 @@ namespace WebApp.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public ActionResult CommentFitnesCenterView(string fitnesCentarNaziv)
+        {
+            List<Komentar> komentari = GetKomentarFitnesCentar(fitnesCentarNaziv);
+            ViewBag.Komentari = komentari;
+            return View();
+        }
+
+        private List<Komentar> GetKomentarFitnesCentar(string fitnesCentar)
+        {
+            List<Komentar> komentari = new List<Komentar>();
+            using(MySqlConnection connection=new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM komentar WHERE FitnesCentar=@fc AND odobren=1";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@fc", fitnesCentar);
+                using(MySqlDataReader reader = cmd.ExecuteReader()) 
+                {
+                    while (reader.Read())
+                    {
+                        Komentar komentar = new Komentar()
+                        {
+                            ID = reader.GetInt32("ID"),
+                            comment_content=reader.GetString("comment_content"),
+                            FitnesCentar=reader.GetString("FitnesCentar"),
+                            odobren=reader.GetBoolean("odobren"),
+                            ocena=reader.GetInt32("ocena")
+                        };
+                        komentari.Add(komentar);
+                    }
+                }
+            }
+            return komentari;
+        }
+
+        public ActionResult Logout()
+        {
+
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Login", "Auth");
+        }
+
 
     }
 }

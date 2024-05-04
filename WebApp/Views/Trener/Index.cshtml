@@ -59,18 +59,18 @@
         </tr>
         @foreach (var trening in ViewBag.odrzani)
         {
-    <tr>
-        <td>@trening.GrupniTreningID</td>
-        <td>@trening.FitnesCentarNaziv</td>
-        <td>@trening.TipTreninga</td>
-        <td>@(trening.DatumOdrzavanja != DateTime.MinValue ? trening.DatumOdrzavanja.ToString("yyyy-MM-dd") : "")</td>
-        <td>
-            <form method="get" action="@Url.Action("SeeAllSubscribers")">
-                <input type="hidden" name="trainingId" value="@trening.GrupniTreningID" />
-                <button type="submit">Prikazi pretplatnike</button>
-            </form>
-        </td>
-    </tr>
+            <tr>
+                <td>@trening.GrupniTreningID</td>
+                <td>@trening.FitnesCentarNaziv</td>
+                <td>@trening.TipTreninga</td>
+                <td>@(trening.DatumOdrzavanja != DateTime.MinValue ? trening.DatumOdrzavanja.ToString("yyyy-MM-dd") : "")</td>
+                <td>
+                    <form method="get" action="@Url.Action("SeeAllSubscribers")">
+                        <input type="hidden" name="trainingId" value="@trening.GrupniTreningID" />
+                        <button type="submit">Prikazi pretplatnike</button>
+                    </form>
+                </td>
+            </tr>
         }
     </table>
 
@@ -94,7 +94,7 @@
                 <td>@(trening.DatumOdrzavanja != DateTime.MinValue ? trening.DatumOdrzavanja.ToString("yyyy-MM-dd") : "")</td>
                 <td>
                     <form method="post" action="@Url.Action("DeleteSession")">
-                        <input type="hidden" name="trainingId" value="@trening.GrupniTreningID"/>
+                        <input type="hidden" name="trainingId" value="@trening.GrupniTreningID" />
                         <button>Izbrisi</button>
                     </form>
                 </td>
@@ -113,6 +113,9 @@
             </tr>
         }
     </table>
+    <form action="@Url.Action("LogOut")" method="post">
+        <button type="submit">Log out</button>
+    </form>
 
 </body>
 </html>

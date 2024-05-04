@@ -1,0 +1,20 @@
+﻿<table class="table" border="1">
+    <thead>
+        <tr>
+            <th>Komentar</th>
+            <th>Ocena</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var comment in ViewBag.Komentari)
+        {
+            <tr>
+                <td>@comment.comment_content</td>
+                <td>@comment.ocena</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<form action="@Url.Action("LogOut")" method="post">
+    <button type="submit">Log out</button>
+</form>
