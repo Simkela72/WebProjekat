@@ -1,0 +1,63 @@
+CREATE TABLE `fitnes_centar` (
+  `Naziv` varchar(50) NOT NULL,
+  `Adresa` varchar(100) DEFAULT NULL,
+  `GodinaOtvaranja` decimal(10,2) DEFAULT NULL,
+  `Cena_mesec` decimal(10,2) DEFAULT NULL,
+  `Cena_godina` decimal(10,2) DEFAULT NULL,
+  `Jedan_trening` decimal(10,2) DEFAULT NULL,
+  `Grupni_trening` decimal(10,2) DEFAULT NULL,
+  `Cena_personal_trener` decimal(10,2) DEFAULT NULL,
+  `Vlasnik` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`Naziv`),
+  KEY `Vlasnik` (`Vlasnik`),
+  CONSTRAINT `fitnes_centar_ibfk_1` FOREIGN KEY (`Vlasnik`) REFERENCES `korisnik` (`KorisnickoIme`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `grupni_trening` (
+  `GrupniTreningID` int NOT NULL AUTO_INCREMENT,
+  `FitnesCentarNaziv` varchar(50) DEFAULT NULL,
+  `TipTreninga` enum('Yoga','LesMillsTone','BodyPump') DEFAULT NULL,
+  `Trajanje` int DEFAULT NULL,
+  `DatumOdrzavanja` date DEFAULT NULL,
+  `MaxPosetilaca` int DEFAULT NULL,
+  `Trener` varchar(50) DEFAULT NULL,
+  `Odrzan` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`GrupniTreningID`),
+  KEY `grupni_trening_ibfk_1` (`FitnesCentarNaziv`),
+  KEY `grupni_trening_ibfk_2` (`Trener`),
+  CONSTRAINT `grupni_trening_ibfk_1` FOREIGN KEY (`FitnesCentarNaziv`) REFERENCES `fitnes_centar` (`Naziv`) ON DELETE CASCADE,
+  CONSTRAINT `grupni_trening_ibfk_2` FOREIGN KEY (`Trener`) REFERENCES `korisnik` (`KorisnickoIme`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `posetilac_trening` (
+  `PosetilacTreningID` int NOT NULL AUTO_INCREMENT,
+  `Grupni_Trening` int DEFAULT NULL,
+  `Posetilac` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`PosetilacTreningID`),
+  KEY `Posetilac` (`Posetilac`),
+  KEY `Grupni_Trening` (`Grupni_Trening`),
+  CONSTRAINT `posetilac_trening_ibfk_1` FOREIGN KEY (`Posetilac`) REFERENCES `korisnik` (`KorisnickoIme`) ON DELETE CASCADE,
+  CONSTRAINT `posetilac_trening_ibfk_2` FOREIGN KEY (`Grupni_Trening`) REFERENCES `grupni_trening` (`GrupniTreningID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `korisnik` (
+  `KorisnickoIme` varchar(50) NOT NULL,
+  `Lozinka` varchar(50) DEFAULT NULL,
+  `Ime` varchar(50) DEFAULT NULL,
+  `Prezime` varchar(50) DEFAULT NULL,
+  `Pol` enum('Muski','Zenski','Drugo') DEFAULT NULL,
+  `Email` varchar(50) DEFAULT NULL,
+  `DatumRodjenja` date DEFAULT NULL,
+  `Uloga` enum('Posetilac','Trener','Vlasnik') DEFAULT NULL,
+  PRIMARY KEY (`KorisnickoIme`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `trener_centar` (
+  `Trener_CentarID` int NOT NULL AUTO_INCREMENT,
+  `Fitnes_Centar` varchar(50) DEFAULT NULL,
+  `Trener` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`Trener_CentarID`),
+  KEY `Trener` (`Trener`),
+  KEY `Fitnes_Centar` (`Fitnes_Centar`),
+  CONSTRAINT `trener_centar_ibfk_1` FOREIGN KEY (`Trener`) REFERENCES `korisnik` (`KorisnickoIme`) ON DELETE CASCADE,
+  CONSTRAINT
